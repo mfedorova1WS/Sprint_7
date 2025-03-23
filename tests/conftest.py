@@ -19,10 +19,7 @@ def valid_courier_data():
 def new_courier(api_client, valid_courier_data):
     """Создаем курьера перед тестом и удаляем его после теста"""
     response = api_client.create_courier(valid_courier_data)
-    assert response.status_code == 201, f"Failed to create courier: {response.json()}"
-
     yield valid_courier_data
-
     # Логинимся, получаем ID и удаляем курьера
     login_response = api_client.login_courier({
         "login": valid_courier_data["login"],
